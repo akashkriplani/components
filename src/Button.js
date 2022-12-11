@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 
 function Button({ children, primary, secondary, warning, success, danger, outline, rounded, ...rest }) {
-  const classes = classnames('flex items-center px-3 py-1.5 border', {
+  const classes = classnames(rest.className, 'flex items-center px-3 py-1.5 border', {
     'border-blue-500 bg-blue-500 text-white': primary,
     'border-gray-900 bg-gray-900 text-white': secondary,
     'border-yellow-400 bg-yellow-400 text-white': warning,
