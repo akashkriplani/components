@@ -14,12 +14,6 @@ function Dropdown({ options, selection, onSelect }) {
     onSelect(option);
   };
 
-  let content = 'Select...';
-
-  if (selection) {
-    content = selection.label;
-  }
-
   const renderedOptions = options.map((option) => {
     return (
       <div onClick={() => handleOptionClick(option)} key={option.value}>
@@ -30,7 +24,7 @@ function Dropdown({ options, selection, onSelect }) {
 
   return (
     <div>
-      <div onClick={handleClick}>{content}</div>
+      <div onClick={handleClick}>{selection?.label || 'Select...'}</div>
       {isOpen && renderedOptions}
     </div>
   );
