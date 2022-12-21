@@ -1,9 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GoChevronDown } from 'react-icons/go';
 import Panel from './Panel';
 
 function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const divEl = useRef();
+
+  useEffect(() => {
+    const handler = (event) => {
+      // If reference is not present just return
+      if (!divEl.current) {
+        return;
+      }
+
+      if (!divEl.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handler, true);
+
+    return () => {
+      // This is a clean up function called just after second re-render of component
+      document.removeEventListener('click', handler);
+    };
+  }, []);
 
   const handleClick = () => {
     setIsOpen((currentIsOpen) => !currentIsOpen);
@@ -29,7 +51,7 @@ function Dropdown({ options, value, onChange }) {
   });
 
   return (
-    <div className="w-48 relative">
+    <div ref={divEl} className="w-48 relative">
       <Panel className="flex justify-between items-center cursor-pointer" onClick={handleClick}>
         {value?.label || 'Select...'}
         <GoChevronDown className="text-lg" />
