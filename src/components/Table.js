@@ -6,7 +6,7 @@ function Table({ data, config }) {
   const renderedRows = data.map((fruit) => {
     const renderedCells = config.map((column) => {
       return (
-        <td className="p-3" key={column.label}>
+        <td className="p-2" key={column.label}>
           {column.render(fruit)}
         </td>
       );
